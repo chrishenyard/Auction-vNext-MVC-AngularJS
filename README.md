@@ -3,6 +3,8 @@
   <h1>Sample auction application developed using Visual Studio vNext, MVC, AngularJS, JSON, grunt, jasmine and karma</h1>
 </div>
 
+<p>Tested in the latest versions of Chrome and Firefox</p>
+
 <div>
   <h1>C# Concepts</h1>
   <ul>
