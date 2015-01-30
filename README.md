@@ -1,20 +1,33 @@
 # Auction-vNext-MVC-AngularJS
-Sample auction application developed using Visual Studio vNext, MVC, AngularJS, JSON, grunt, jasmine and karma.
+<div>
+  <h1>Sample auction application developed using Visual Studio vNext, MVC, AngularJS, JSON, grunt, jasmine and karma</h1>
+</div>
 
-C# Concepts
-  Asynchronous IO
-  MVC
-  Dependency injection
-  Locks (critical sections)
-  JSON
+<div>
+  <h1>C# Concepts</h1>
+  <ul>
+    <li>Asynchronous IO</li>
+    <li>MVC</li>
+    <li>Dependency injection</li>
+    <li>Locks (critical sections)</li>
+    <li>JSON</li>
+  </ul>
+</div>
 
-AngularJS Concepts
-  Scope isolation
-  Directives
-  Timers
-  Promises
+<div>
+  <h1>AngularJS Concepts</h1>
+  <ul>
+    <li>Scope isolation</li>
+    <li>Directives</li>
+    <li>Timers</li>
+    <li>Promises</li>
+  </ul>
+</div>
   
-CSS Concepts
-  Responsive design using bootstrap
-  Animation
-  
+<div>
+  <h1>CSS Concepts</h1>
+  <ul>
+    <li>Responsive design using bootstrap</li>
+    <li>Animation</li>
+  </ul>
+</div>
