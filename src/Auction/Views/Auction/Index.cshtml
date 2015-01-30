@@ -1,0 +1,134 @@
+﻿@{ Layout = null; }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Auction</title>
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/lib/ladda-boostrap-hakimel/css/ladda-themeless.min.css" rel="stylesheet">
+    <link href="~/css/auction.css" rel="stylesheet">
+</head>
+<body ng-app="auctionApp" ng-controller="auctionCtrl as auction">
+    <div class="splash" ng-cloak="">
+    </div>
+
+    <div class="auction-item-wrapper" ng-cloak="">
+        <div class="alert alert-danger" role="alert" ng-hide="auction.error === false" ng-cloak="">
+            <strong>Error! </strong>{{auction.status}}
+        </div>
+
+        <div class="container-fluid">
+            <form class="form-inline" ng-cloak="">
+                <div class="form-group">
+                    <input type="number" name="interval" id="interval"
+                           min="1" max="5" step="1" value="3"
+                           class="form-control"
+                           ng-model="auction.autoBidDefinition.interval"
+                           ng-disabled="auction.autoBidDefinition.running">
+                </div>
+                <button type="button"
+                        class="btn btn-primary btn-sm ladda-button"
+                        ng-click="auction.autoBid()"
+                        data-style="expand-right"
+                        auction-button-spinner="auction.autoBidDefinition.running"
+                        auction-button-spinner-disable="false">
+                    <span class="ladda-label">
+                        {{auction.autoBidDefinition.running ? "Stop Run" : "Auto Run"}}
+                    </span>
+                </button>
+            </form>
+
+            <div class="row">
+                <div class="col-md-4" ng-repeat="item in auction.items">
+                    <div id="{{item.Id}}" class="auction-item-container">
+                        <div class="outbid">
+                            <span class="message" ng-show="item.Outbid">Outbid</span>
+                        </div>
+                        <div class="auction-item-image">
+                            <img src="{{item.ImageUrl}}" />
+                        </div>
+                        <span class="description">{{item.Description}}</span>
+                        <div class="current-bid detail">
+                            <div class="currency-text">Current Bid:</div>
+                            <div>
+                                <span class="currency-amount"
+                                      auction-highlight="item.HighBid"
+                                      item="item"
+                                      ng-bind="item.HighBid | number:0">
+                                </span> <span class="currency-name">Points</span>
+                            </div>
+                        </div>
+
+                        <div id="bidStatus" class="timer detail" auction-slide-show item-id="{{item.Id}}">
+                            <div class="slide-show message" id="time" ng-show="show('time')">
+                                <div class="timer-text"><img src="/images/quarter.png" />Time Left:</div>
+                                <div class="timer-remaining">
+                                    <auction-timer closed="{{item.Closed}}" item="item"></auction-timer>
+                                </div>
+                            </div>
+                            <div class="slide-show message" id="processing" ng-show="show('processing')">
+                                Determining Winner
+                                <div class="spinner" auction-element-spinner></div>
+                            </div>
+                            <div class="slide-show message" id="winner" ng-show="show('winner')">
+                                Winner: <span class="winner">{{item.winner.FirstName }} {{item.winner.LastName }}</span>
+                            </div>
+                        </div>
+
+                        <div class="place-bid">
+                            <button type="button"
+                                    class="btn btn-primary btn-sm ladda-button"
+                                    ng-click="auction.saveBid(item)"
+                                    ng-disabled="item.Processing || item.TimedOut"
+                                    data-style="zoom-in"
+                                    auction-button-spinner="item.Processing">
+                                Place Bid
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/js/jquery.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+    <script src="~/lib/angular/js/angular.js"></script>
+    <script src="~/lib/angular-animate/js/angular-animate.js"></script>
+    <script src="~/lib/spin.js/js/spin.js"></script>
+    <script src="~/lib/ladda-boostrap-hakimel/js/ladda-forked.js"></script>
+    <script src="~/app/services/auction.svc.js"></script>
+    <script src="~/app/auction.js"></script>
+    <script src="~/app/lib/date.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var opts = {
+                lines: 13,
+                width: 10,
+                radius: 30,
+                corners: 1,
+                rotate: 0,
+                direction: 1,
+                color: 'white',
+                speed: 1,
+                trail: 60,
+                shadow: false,
+                hwaccel: false,
+                className: 'spinner',
+                zIndex: 2e9,
+                top: '50%',
+                left: '50%'
+            };
+
+            var splash = angular.element('.splash')[0];
+            var spinner = new Spinner(opts).spin();
+            splash.appendChild(spinner.el);
+        });
+
+    </script>
+</body>
+
+</html>
