@@ -23,6 +23,7 @@
     <li>Directives</li>
     <li>Timers</li>
     <li>Promises</li>
+    <li>Unit tests</li>
   </ul>
 </div>
   
