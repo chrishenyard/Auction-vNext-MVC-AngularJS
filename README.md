@@ -1,6 +1,6 @@
-# Auction-vNext-MVC-AngularJS
+# <a href="http://chenyard.azurewebsites.net/" target="_blank">Auction-vNext-MVC-AngularJS</a>
 <div>
-  <h1><a href="http://chenyard.azurewebsites.net/" target="_blank">Sample auction application developed using Visual Studio vNext, MVC, AngularJS, JSON, grunt, jasmine and karma</a></h1>
+  <h1>Sample auction application developed using Visual Studio vNext, MVC, AngularJS, JSON, grunt, jasmine and karma</h1>
 </div>
 
 <p>Tested in the latest versions of Chrome and Firefox</p>
