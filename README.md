@@ -4,7 +4,7 @@
 </div>
 
 <p>Tested in the latest versions of Chrome and Firefox</p>
-<p><a href="http://chenyard.azurewebsites.net/">See it running here</a></p>
+<p><a href="http://chenyard.azurewebsites.net/" target="_blank">See it running here</a></p>
 
 <div>
   <h1>C# Concepts</h1>
