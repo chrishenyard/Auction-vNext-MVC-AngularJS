@@ -72,6 +72,7 @@ auction.EventTypes = {
 		var ctrl = this;
 		ctrl.status = '';
 		ctrl.error = false;
+		ctrl.initialized = false;
 		ctrl.items = [];
 		ctrl.users = [];
 		ctrl.winner = { Id: '', FirstName: 'No', LastName: 'Winner' };
@@ -119,6 +120,7 @@ auction.EventTypes = {
 			}).finally(
 				function () {
 					console.info('Done initializing');
+					ctrl.initialized = true;
 				}
 			);
 		}

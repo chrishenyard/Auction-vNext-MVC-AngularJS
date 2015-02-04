@@ -11,16 +11,16 @@
     <link href="~/css/auction.css" rel="stylesheet">
 </head>
 <body ng-app="auctionApp" ng-controller="auctionCtrl as auction">
-    <div class="splash" ng-cloak="">
+    <div class="splash" ng-cloak ng-hide="auction.initialized">
     </div>
 
-    <div class="auction-item-wrapper" ng-cloak="">
-        <div class="alert alert-danger" role="alert" ng-hide="auction.error === false" ng-cloak="">
+    <div class="auction-item-wrapper" ng-cloak ng-hide="!auction.initialized">
+        <div class="alert alert-danger" role="alert" ng-hide="auction.error === false" ng-cloak>
             <strong>Error! </strong>{{auction.status}}
         </div>
 
         <div class="container-fluid">
-            <form class="form-inline" ng-cloak="">
+            <form class="form-inline" ng-cloak>
                 <div class="form-group">
                     <input type="number" name="interval" id="interval"
                            min="1" max="5" step="1" value="3"

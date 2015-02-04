@@ -1,11 +1,11 @@
 ﻿using Auction.Models;
 using Auction.Serializers;
 using Auction.Extensions;
+using Microsoft.Framework.ConfigurationModel;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Text;
-using Microsoft.Framework.ConfigurationModel;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 
@@ -14,8 +14,7 @@ namespace Auction.Repositories {
 	class AuctionAzureStorageRepository : IAuctionFileRepository {
 		private CloudBlobContainer _container;
 
-		public AuctionAzureStorageRepository() {
-			var config = new Configuration();
+		public AuctionAzureStorageRepository(Configuration config) {
 			var account = CloudStorageAccount.Parse(config.Get("AzureConnectionString"));
 			var client = account.CreateCloudBlobClient();
 			_container = client.GetContainerReference(config.Get("AzureContainer"));

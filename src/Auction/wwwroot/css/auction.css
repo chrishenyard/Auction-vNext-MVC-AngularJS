@@ -8,14 +8,6 @@
 }
 
 .splash {
-    display: none;
-}
-
-[ng-cloak].splash {
-    display: block !important;
-}
-
-.splash {
     position: absolute;
     top: 0;
     left: 0;

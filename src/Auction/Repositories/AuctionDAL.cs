@@ -36,13 +36,14 @@ namespace Auction.Repositories
 		}
 
 		public async Task<List<AuctionItem>> GetAuctionItemsAsync() {
-			var fileNames = Directory.GetFiles(_itemsBasePath);
+			var fileNames = await _auctionFileRepository.GetAuctionItemFileNamesAsync(_itemsBasePath);
 			var auctionItems = new List<AuctionItem>();
 			
 			foreach (var fileName in fileNames) {
 				var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
-                using (var releaser = await _asyncLock.LockAsync(fileNameWithoutExtension)) {
-					var item = await _auctionFileRepository.GetAuctionItemAsync(fileName);
+				var fullFileName = Path.Combine(_itemsBasePath, fileName);
+				using (var releaser = await _asyncLock.LockAsync(fileNameWithoutExtension)) {
+					var item = await _auctionFileRepository.GetAuctionItemAsync(fullFileName);
 					auctionItems.Add(item);
 				}
 			}
@@ -78,17 +79,19 @@ namespace Auction.Repositories
 		}
 
 		public async Task ResetAuctionItemsAsync() {
-			var fileNames = Directory.GetFiles(_itemsBasePath);
+			var fileNames = await _auctionFileRepository.GetAuctionItemFileNamesAsync(_itemsBasePath);
 			var now = DateTimeOffset.Now;
 			var i = 1;
 
 			foreach (var fileName in fileNames) {
 				var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
 				using (var releaser = await _asyncLock.LockAsync(fileNameWithoutExtension)) {
-					var item = await _auctionFileRepository.GetAuctionItemAsync(fileName);
+					var itemFileName = Path.Combine(_itemsBasePath, fileName);
+					var item = await _auctionFileRepository.GetAuctionItemAsync(itemFileName);
+
 					item.HighBid = 0;
 					item.Closed = now.AddMinutes(i++ * 15).AddSeconds(i * 3);
-					await _auctionFileRepository.SaveAuctionItemAsync(item, fileName);
+					await _auctionFileRepository.SaveAuctionItemAsync(item, itemFileName);
 
 					var bidFileName = Path.Combine(_bidsBasePath, item.Id + BidsFileSuffix);
 					await _auctionFileRepository.TruncateFileAsync(bidFileName);

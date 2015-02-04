@@ -1,10 +1,11 @@
 ﻿using Auction.Models;
 using Auction.Serializers;
+using Microsoft.Framework.ConfigurationModel;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Text;
-using System;
 
 namespace Auction.Repositories {
 	public interface IAuctionFileRepository {
@@ -14,9 +15,13 @@ namespace Auction.Repositories {
 		Task<List<User>> GetUsersAsync(string fileName);
 		Task TruncateFileAsync(string fileName);
 		Task<List<AuctionBid>> GetAuctionBidsAsync(string fileName);
+		Task<List<string>> GetAuctionItemFileNamesAsync(string basePath);
 	}
 
 	public class AuctionFileRepository : IAuctionFileRepository {
+
+		public AuctionFileRepository(Configuration config) {
+		}
 
 		public async Task<AuctionItem> GetAuctionItemAsync(string fileName) {
 			AuctionItem auctionItem = null;
@@ -78,6 +83,20 @@ namespace Auction.Repositories {
 			}
 
 			return bids;
+		}
+
+		public async Task<List<string>> GetAuctionItemFileNamesAsync(string basePath) {
+			var fileNames = new List<string>();
+
+			await Task.Factory.StartNew(() => {
+				var list = Directory.GetFiles(basePath).ToList();
+				foreach (var path in list) {
+					var fileName = Path.GetFileName(path);
+					fileNames.Add(fileName);
+				}
+			});
+
+			return fileNames;
 		}
 	}
 }

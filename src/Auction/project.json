@@ -21,7 +21,9 @@
         "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-beta1",
         "Microsoft.AspNet.WebApi.Tracing": "5.2.3.0-beta1",
         "Microsoft.AspNet.WebApi.WebHost": "5.2.3.0-beta1",
-        "CoreCLR": "1.0.0.0-beta3-10257"
+        "CoreCLR": "1.0.0.0-beta4-10264",
+        "WindowsAzure.Storage": "4.3.0.0"
+
     },
     "commands": {
         /* Change the port number when you are self hosting this application */
@@ -33,8 +35,7 @@
         "aspnet50": {
             "dependencies": {
             }
-        },
-        "aspnetcore50": { }
+        }
     },
     "exclude": [
         "wwwroot",

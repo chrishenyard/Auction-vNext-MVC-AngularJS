@@ -45,9 +45,15 @@ namespace Auction {
 			// You need to add Microsoft.AspNet.Mvc.WebApiCompatShim package to project.json
 			// services.AddWebApiConventions();
 
-			var auctionFileRepository = new AuctionFileRepository();
-            services.AddInstance<IAuctionFileRepository>(auctionFileRepository);
-			services.AddInstance<IAuctionDAL>(new AuctionDAL(auctionFileRepository, HostingEnvironment.WebRoot));
+			var repo = Activator.CreateInstance(
+				Type.GetType(Configuration.Get("Repository:Type")), 
+				new object[] { Configuration }) as IAuctionFileRepository;
+
+			var truncateWebRoot = Configuration.Get<bool>("Repository:TruncateWebRoot");
+			var webRoot = truncateWebRoot ? string.Empty :  HostingEnvironment.WebRoot;
+
+			services.AddInstance<IAuctionFileRepository>(repo);
+			services.AddInstance<IAuctionDAL>(new AuctionDAL(repo, webRoot));
         }
 
         // Configure is called after ConfigureServices is called.
