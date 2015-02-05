@@ -1,6 +1,6 @@
 # <a href="http://chenyard.azurewebsites.net/" target="_blank">Auction-vNext-MVC-AngularJS</a>
 <div>
-  <h1>Sample auction application developed using Visual Studio vNext, MVC, AngularJS, JSON, grunt, jasmine and karma</h1>
+  <h1>Sample auction application developed using Visual Studio vNext, MVC, azure storage, AngularJS, JSON, grunt, jasmine and karma</h1>
 </div>
 
 <p>Tested in the latest versions of Chrome and Firefox</p>
@@ -9,6 +9,7 @@
   <h1>C# Concepts</h1>
   <ul>
     <li>Asynchronous IO</li>
+    <li>Azure storage</li>
     <li>MVC</li>
     <li>Dependency injection</li>
     <li>Locks (critical sections)</li>
