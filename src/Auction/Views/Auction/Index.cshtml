@@ -21,23 +21,33 @@
 
         <div class="container-fluid">
             <form class="form-inline" ng-cloak>
-                <div class="form-group">
-                    <input type="number" name="interval" id="interval"
-                           min="1" max="5" step="1" value="3"
-                           class="form-control"
-                           ng-model="auction.autoBidDefinition.interval"
-                           ng-disabled="auction.autoBidDefinition.running">
-                </div>
-                <button type="button"
-                        class="btn btn-primary btn-sm ladda-button"
-                        ng-click="auction.autoBid()"
-                        data-style="expand-right"
-                        auction-button-spinner="auction.autoBidDefinition.running"
-                        auction-button-spinner-disable="false">
-                    <span class="ladda-label">
-                        {{auction.autoBidDefinition.running ? "Stop Run" : "Auto Run"}}
-                    </span>
-                </button>
+                <table>
+                    <tr>
+                        <td class="interval">
+                            <div class="form-group">
+                                <input type="number" name="interval" id="interval"
+                                       min="1" max="5" step="1" value="3"
+                                       class="form-control"
+                                       ng-model="auction.autoBidDefinition.interval"
+                                       ng-disabled="auction.autoBidDefinition.running">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <button type="button"
+                                        class="btn btn-primary btn-sm ladda-button"
+                                        ng-click="auction.autoBid()"
+                                        data-style="expand-right"
+                                        auction-button-spinner="auction.autoBidDefinition.running"
+                                        auction-button-spinner-disable="false">
+                                    <span class="ladda-label">
+                                        {{auction.autoBidDefinition.running ? "Stop Run" : "Auto Run"}}
+                                    </span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </form>
 
             <div class="row">

@@ -29,6 +29,10 @@
     margin: 0 auto;
 }
 
+.auction-item-wrapper .interval {
+	min-width: 60px;
+}
+
 .auction-item-container {
     min-height: 400px;
 	min-width: 140px;
